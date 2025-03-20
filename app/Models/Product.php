@@ -19,11 +19,24 @@ class Product extends Model
         'finalPrice',
         'stock',
         'stockQuantity',
-        'discription',
+        'description',
         'active' 
     ];
 
-    function pic(){
-        return Storage::url($this->pic);
+    function maincategory(){
+        return $this->belongsTo(Maincategory::class,"maincategory_id");
     }
+
+    function subcategory(){
+        return $this->belongsTo(Subcategory::class,"subcategory_id");
+    }
+
+    function brand(){
+        return $this->belongsTo(Brand::class,"brand_id");
+    }
+
+    function images(){
+        return $this->hasMany(ProductImage::class);
+    }
+  
 }

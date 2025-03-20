@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer("finalprice")->require();
             $table->boolean("stock")->nullable(true)->default(true);
             $table->integer("stockquantity")->require();
-            $table->text("discription")->require();
+            $table->text("description")->require();
             $table->boolean("active")->nullable(true)->default(true);
 
             $table->bigInteger("maincategory_id")->unsigned()->index();

@@ -28,7 +28,6 @@
         <h1 class="sitename">{{config('app.name')}}</h1>
         <span>.</span>
       </a>
-
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{{route('home')}}">Home<br></a></li>

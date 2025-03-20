@@ -53,7 +53,7 @@ class AdminProductController extends Controller
             "discount" => "required|numeric|min:0|max:100",
             "stockQuantity" => "required|numeric|min:0",
             "pic" => "required",
-            "pic.*" => "required|image|mimes:jpeg,jpg,png,gif|max:1024"
+            'pic.*' => 'required|image|mimes:jpeg,jpg,png,gif|max:1024'
         ]);
 
         $picName = [];
@@ -71,7 +71,7 @@ class AdminProductController extends Controller
             "basePrice" => $request->basePrice,
             "discount" => $request->discount,
             "finalPrice" => intval($request->basePrice - $request->basePrice * $request->discount / 100),
-            "discription" => $request->discription,
+            "description"=>$request->description,
             "stock" => $request->stock,
             "stockQuantity" => $request->stockQuantity,
             "active" => $request->active
@@ -101,7 +101,10 @@ class AdminProductController extends Controller
     {
         $data = $this->product->find($id);
         $title = "Update Product";
-        return view("admin.product.update", compact("title", 'data'));
+        $maincategories = $this->maincategory->where("active", true)->latest()->get();
+        $subcategories = $this->subcategory->where("active", true)->latest()->get();
+        $brands = $this->brand->where("active", true)->latest()->get();
+        return view("admin.product.update", compact("title", 'data','maincategories','subcategories','brands'));
     }
 
     /**

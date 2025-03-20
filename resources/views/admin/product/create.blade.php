@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="mb-3">
                             <label>Description*</label>
-                            <textarea name="discription" id="RichTextEditor" rows="5" style="border:3px solid gray">{{ old('discription') }}</textarea>
+                            <textarea name="description" id="RichTextEditor" rows="5" style="border:3px solid gray">{{ old('description') }}</textarea>
                         </div>
                     </div>
 

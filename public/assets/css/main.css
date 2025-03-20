@@ -119,6 +119,16 @@ body {
   display: none;
 }
 
+.admin-product-pic {
+  min-width: 300px;
+  overflow: auto;
+  text-align: justify;
+}
+
+.admin-product-pic::-webkit-scrollbar {
+  display: none;
+}
+
 a {
   color: var(--accent-color);
   text-decoration: none;

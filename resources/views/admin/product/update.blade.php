@@ -21,34 +21,132 @@
                     <div class="mb-3">
                         <label>Name*</label>
                         <input type="text" name="name" placeholder="Full Name"
-                            value="{{ old('name') ? old('name') : $data->name }}"
-                            class="form-control border-3 border-secondary">
+                            class="form-control border-3 border-secondary" value="{{ old('name')?old('name'):$data->name}}">
                         @error('name')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
+                    </div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label>Pic</label>
-                                <input type="file" name="pic" placeholder="Image"
-                                    class="form-control border-3 border-secondary">
-                                @error('pic')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label>Active</label>
-                                <select name="active" class="form-select border-3 border-secondary">
-                                    <option
-                                        value="1"{{ (old('active') ? old('active') == '1' : $data->active == '1') ? 'selected' : '' }}>
-                                        yes</option>
-                                    <option
-                                        value="0"{{ (old('active') ? old('active') == '0' : $data->active == '1') ? 'selected' : '' }}>
-                                        No</option>
-                                </select>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <label>Maincategory*</label>
+                            <select name="maincategory_id" class="form-select border-secondary border-3">
+                                @foreach ($maincategories as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ (old('maincategory_id')?old('maincategory_id'):$data->maincategory_id) == $item->id ? 'selected' : '' }}>{{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <label>Subcategory*</label>
+                            <select name="subcategory_id" class="form-select border-secondary border-3">
+                                @foreach ($subcategories as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ (old('subcategory_id')?old('subcategory_id'):$data->subcategory_id) == $item->id ? 'selected' : '' }}>{{ $item->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <label>Brand*</label>
+                            <select name="brand_id" class="form-select border-secondary border-3">
+                                @foreach ($brands as $item)
+                                    <option value="{{ $item->id }}"
+                                        {{ (old('brand_id')?old('brand_id'):$data->brand_id) == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <label>Stock*</label>
+                            <select name="stock" class="form-select border-secondary border-3">
+                                <option value="1" {{ (old('stock')?old('stock'):$data->stock) == '1' ? 'selected' : '' }}>yes</option>
+                                <option value="0" {{ (old('stock')?old('stock'):$data->stock) == '0' ? 'selected' : '' }}>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>color*</label>
+                            <input type="text" name="color" class="form-control border-3 border-secondary"
+                                placeholder="Product Color" value="{{ old('color')?old('color'):$data->color }}">
+                            @error('color')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>size*</label>
+                            <input type="text" name="size" class="form-control border-3 border-secondary"
+                                placeholder="Product Size" value="{{ old('size')?old('size'):$data->size }}">
+                            @error('size')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Base Price*</label>
+                            <input type="number" name="basePrice" class="form-control border-3 border-secondary"
+                                placeholder="Product Base Price" value="{{ old('baseprice')?old('baseprice'):$data->baseprice }}">
+                            @error('basePrice')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Discount*</label>
+                            <input type="number" name="discount" class="form-control border-3 border-secondary"
+                                placeholder="Discount on Product in %" value="{{ old('discount')?old('discount'):$data->discount }}">
+                            @error('discount')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3">
+                            <label>Description*</label>
+                            <textarea name="description" id="RichTextEditor" rows="5" style="border:3px solid gray">{{ old('description')?old('description'):$data->description }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Stock Quantity*</label>
+                            <input type="number" name="stockQuantity" value="{{ old('stockquantity')?old('stockquantity'):$data->stockquantity }}"
+                                placeholder="Stock Quantity" class="form-control border-3 border-secondary">
+                            @error('stockQuantity')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Pic*</label>
+                            <input type="file" name="pic[]" multiple class="form-control border-3 border-secondary">
+                            @error('pic')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            @error('pic.*')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Active*</label>
+                            <select name="active" class="form-select border-3 border-secondary">
+                                <option value="1" {{ old('active') == '1' ? 'selected' : '' }}>yes</option>
+                                <option value="0" {{ old('active') == '0' ? 'selected' : '' }}>No</option>
+                            </select>
+                        </div>
+                    </div>
 
                         <div class="mb-3">
                             <button type="submit" class="btn btn-secondary form-control">Submit</button>
